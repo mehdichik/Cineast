@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+                	
+			<h:form id="master">
+	<p:commandButton icon="ui-icon-circle-plus" actionListener="#{quizBean.doNew()}" value="Add new Quiz" update=":details"/>
+			
+			<p:dataTable rendered="#{not empty quizBean.quizs}"
+			           value="#{quizBean.quizs}" 
+			           var="quiz" 
+			           rows="5"
+			           
+			           widgetVar="userTabW">
+			           
+			     <f:facet name="header">
+			        <h:outputText value="Manage Quiz" />
+			     </f:facet>
+			     
+			      <p:ajax event="rowSelect" listener="#{quizBean.onRowSelect}" update=":details"/>
+			      
+			 		 	
+			 
+			  
+			  
+			     <p:column headerText="Questions">
+			   <h:outputText value="#{quiz.question}" />
+			  </p:column>
+			  
+			  
+			  
+			  <p:column headerText="Valid Answer">
+			   <h:outputText value="#{quiz.answerValidation}" />
+			  </p:column>
+			  
+			</p:dataTable>
+			
+			</h:form>
+			
+			
+</ui:composition>

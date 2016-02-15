@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"    
+       template="/template/main.xhtml"
+      xmlns:p="http://primefaces.org/ui">
+      
+      
+      <ui:define name="pageTitle">My Account</ui:define>
+      <ui:define name="pageContentHeader">
+      <h:outputText value="My Account" />
+      </ui:define>
+      <ui:define name="pageContent">
+      
+      
+      <h:form id="form" >  
+      
+   
+          
+        <h:panelGrid id="grid" columns="2" style="margin-bottom:10px">  
+            <f:facet name="header">  
+                <p:messages />  
+            </f:facet>  
+        
+       		<h:outputLabel for="Login" value="login:" />  
+            <p:inputText id="login" value="#{authBean.admin.login}"  required="true"/>
+       
+            <h:outputLabel for="nom" value="nom:" />  
+            <p:inputText id="nom" value="#{authBean.admin.nom}"  required="true"/>
+           
+                     
+            <h:outputLabel for="prenom" value="prenom:" />  
+            <p:inputText id="prenom" value="#{authBean.admin.prenom}" required="true" />  
+           
+        
+             
+      
+            <h:outputLabel for="email" value="E-mail:" />  
+            <p:inputText id="email" value="#{authBean.admin.mail}"  required="true"/>  
+            
+            <h:outputLabel for="phone" value="Phone number:" />  
+            <p:inputText id="phone" value="#{authBean.admin.phone}"  required="true"/> 
+            
+            <h:outputLabel for="pwd1" value="New password:" />  
+            <p:password id="pwd1"  match="pwd2" label="Password 1" feedback="true"  required="true"/>  
+  
+            <h:outputLabel for="pwd2" value="Comfirm new password:" />  
+            <p:password id="pwd2" value="#{authBean.admin.password}" label="Password 2"  required="true"/>  
+             
+             <br/><br/><br/><br/><br/><br/>
+             
+              <p:commandButton id="saveButton" action="#{authBean.doModify()}" update="@form" value="Save" />  
+             
+        </h:panelGrid>  
+        
+        
+          
+
+      
+   
+  
+</h:form>  
+
+
+      
+      
+   
+      
+      </ui:define>
+</ui:composition>

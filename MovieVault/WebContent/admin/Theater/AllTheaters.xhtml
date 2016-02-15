@@ -1,0 +1,172 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                   template="/template/main.xhtml">
+                	
+			<ui:define name="pageContent">
+
+
+<h:form id="form">
+			    <p:growl id="messages" showDetail="true"/>
+                
+
+	<p:dataGrid var="ci" value="#{tableBean.cinemaTheaters}" columns="3"
+		rows="12" 
+		paginator="true"
+			           paginatorPosition="bottom">
+
+        <p:panel header="#{ci.name}" style="text-align:center">
+            <h:panelGrid columns="1" style="width:100%">
+<p:graphicImage id="place_image" value="#{theaterImageBean.image}" cache="false" styleClass="editor-picture" height="170"
+										width="290">
+    							<f:param name="idTheater" value="#{ci.id_Theater}" />
+						</p:graphicImage>
+                <h:outputText value="#{ci.description}" />
+
+                 <p:commandLink update=":form:placeDetail" oncomplete="PF('placeDialog').show()" title="View Detail">
+                 
+                    <h:outputText styleClass="ui-icon ui-icon-image" style="margin:0 auto;" /> 
+                    <f:setPropertyActionListener value="#{ci}" 
+                            target="#{tableBean.selectedTheater}" />
+</p:commandLink>                
+                
+                
+                <p:commandLink update=":form:mapDialog" oncomplete="PF('mapDialog').show()" title="View Detail">
+                 
+                    <h:outputText value="Show map" /> 
+                    <f:setPropertyActionListener value="#{ci}" 
+                            target="#{tableBean.selectedTheater}" />
+                </p:commandLink>
+                
+    
+              </h:panelGrid>
+                 
+                  
+        </p:panel>
+
+	</p:dataGrid>
+
+
+	
+	
+	<p:dialog header="mapDialog" widgetVar="mapDialog" modal="true" >
+		<p:outputPanel id="mapDialog" style="text-align:center;">
+		
+		<p:gmap center="#{tableBean.selectedTheater.latitude}, #{tableBean.selectedTheater.longitude}" zoom="10" type="HYBRID" 
+		style="width:600px;height:400px" model="#{mapBean.simpleModel}" >
+		
+		 <p:ajax event="overlaySelect" listener="#{mapBean.onMarkerSelect}"  />  
+  
+        <p:gmapInfoWindow>  
+            <p:outputPanel  style="text-align:center;display:block;margin:auto:"> 
+                    
+       <p:graphicImage   value="#{theaterImageBean.image}" style="height:150px;width:150px"> 
+         
+                  <f:param  name="idTheater" value="#{tableBean.selectedTheater.id_Theater}" />
+              
+               </p:graphicImage>
+                <br />
+                    <h:outputText value="#{mapBean.marker.title}" />  
+  
+            </p:outputPanel>  
+        </p:gmapInfoWindow>  	
+		</p:gmap>
+		</p:outputPanel>
+		</p:dialog>
+		
+				
+
+	<p:dialog header="Place Detail" widgetVar="placeDialog" modal="true" dynamic="true" >
+		<p:outputPanel id="placeDetail" style="text-align:center;">
+		
+		<h:panelGrid  columns="2" cellpadding="0" >
+		
+			
+			
+			
+			<h:outputLabel for="Theater Name" value="Theater Name :" />
+				<h:outputText id="TheaterName" value="#{tableBean.selectedTheater.name}"/>
+				
+				<h:outputLabel for="TheaterDesc" value="Description : " />
+				<h:outputText id="Description" value="#{tableBean.selectedTheater.description}" />
+				
+				<h:outputLabel for="location" value="Location : " />
+				<h:outputText id="location" value="#{tableBean.selectedTheater.address}" />
+				<h:outputLabel for="rate" value="Rate number : " />
+			
+				
+				<p:rating value="#{tableBean.selectedTheater.moyRate}" readonly="true" /> 
+				
+				
+				<h:outputLabel for="Creator" value="Creator : " />
+				<h:outputText id="Creator" value="#{tableBean.selectedTheater.personne.login}" />
+			    <h:outputText  value="Picture" />
+				
+				<p:graphicImage id="place_image" value="#{theaterImageBean.image}" cache="false" styleClass="editor-picture"  height="170"
+										width="290">
+    							<f:param name="idTheater" value="#{tableBean.selectedTheater.id_Theater}" />
+						</p:graphicImage>
+						<!-- 					Show video	 -->
+						
+<!-- 				<p:media value="http://www.youtube.com/v/KZnUr8lcqjo" width="400" height="169" player="flash"/> -->
+						
+				
+				
+				
+				     
+				
+<!-- 				Rate Place -->
+<h:outputLabel value="" />
+				<h:outputLabel for="RatePlace" value="Rate this Place " />
+
+        <p:rating value="#{tableBean.cinemaTheater.rate}">
+            <p:ajax event="rate" listener="#{tableBean.onrate}" update="messages" />
+        </p:rating>
+        
+      
+   
+    <h:outputLabel value="" /> 
+    
+       
+  
+        
+        
+                
+			</h:panelGrid>
+	
+		</p:outputPanel>
+		
+	</p:dialog>
+	
+	
+
+</h:form>
+<div id="fb-root"></div>
+<script type="text/javascript">
+	function handleLoginRequest(xhr, status, args) {
+           //PF('placeDialog').jq.effect("shake", { times:5 }, 100);
+           location.reload();
+           
+            PF('placeDialog').show();
+//   $('#comments').fadeOut();
+
+    }
+</script>
+
+
+
+
+
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&amp;appId=516741378384565&amp;version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+</ui:define>
+</ui:composition>
+		

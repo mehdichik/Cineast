@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<!-- BEGIN SIDE NAVIGATION -->
+	<nav class="navbar-side" role="navigation">
+	<div class="navbar-collapse sidebar-collapse collapse">
+
+		<!-- BEGIN SHORTCUT BUTTONS -->
+
+		<!-- END SHORTCUT BUTTONS -->
+
+		<!-- BEGIN FIND MENU ITEM INPUT -->
+
+		<!-- END FIND MENU ITEM INPUT -->
+		<br /> <br /> <br /> <br /> <br /> <br />
+
+		<ul id="side" class="nav navbar-nav side-nav">
+			<!-- BEGIN SIDE NAV MENU -->
+			<!-- Navigation category -->
+			<li>
+				<h4>Navigation</h4>
+			</li>
+			<!-- END Navigation category -->
+
+			<li><a class="active" href="#{request.contextPath}/admin/home.jsf"> <i
+					class="fa fa-dashboard"></i> Home
+			</a></li>
+			<li><a href="#{request.contextPath}/admin/Movie/manageMovie.jsf"> <i class="fa fa-list"></i>
+					Movies
+			</a></li>
+
+	
+			<li><a href="#{request.contextPath}/admin/Movie/Box.jsf"> <i class="fa fa-list"></i>
+					BoxOffice
+			</a></li>
+			
+			<li><a href="#{request.contextPath}/admin/Users/mail.jsf"> <i class="fa fa-list"></i>
+					Mail
+			</a></li>
+				<li><a href="#{request.contextPath}/admin/msg/chat.jsf"> <i class="fa fa-list"></i>
+				Chat
+			</a></li>
+			
+	<li><a href="#{request.contextPath}/admin/msg/msg.jsf"> <i class="fa fa-list"></i>
+				MSG
+			</a></li>
+	<li><a href="#{request.contextPath}/admin/Quiz/manageQuiz.jsf"> <i class="fa fa-list"></i>
+			Quiz
+			</a></li>
+			<!-- BEGIN COMPONENTS DROPDOWN -->
+
+			<!-- END COMPONENTS DROPDOWN -->
+
+			<!-- BEGIN FORMS DROPDOWN -->
+			<li class="panel"><a href="#{request.contextPath}/admin/Event/manageEvent.jsf" data-parent="#side"
+				data-toggle="collapse" class="accordion-toggle" data-target="#forms">
+					<i class="fa fa-edit"></i> Events <span class="fa arrow"></span>
+			</a>
+				<ul class="collapse nav" id="forms">
+					<li><a href="event.html"> <i
+							class="fa fa-angle-double-right"></i> List of events
+					</a></li>
+					
+					<li><a href="#"> <i class="fa fa-angle-double-right"></i>
+							Add Events
+					</a></li>
+
+				</ul></li>
+			<!-- END FORMS DROPDOWN -->
+
+			<!-- BEGIN CHARTS DROPDOWN -->
+			<li class="panel"><a href="#{request.contextPath}/admin/Theater/AllTheaters.jsf" data-parent="#side"
+				data-toggle="collapse" class="accordion-toggle"
+				data-target="#charts"> <i class="fa fa-bar-chart-o"></i> Theaters
+					<span class="fa arrow"></span>
+			</a>
+				<ul class="collapse nav" id="charts">
+					<li><a href="flot.html"> <i
+							class="fa fa-angle-double-right"></i> Flot Charts
+					</a></li>
+					<li><a href="morris.html"> <i
+							class="fa fa-angle-double-right"></i> Morris Charts
+					</a></li>
+				</ul></li>
+				<li class="panel"><a href="#{request.contextPath}/admin/Theater/manageTheater.jsf" data-parent="#side"
+				data-toggle="collapse" class="accordion-toggle"
+				data-target="#charts"> <i class="fa fa-bar-chart-o"></i> Manage Theater
+					<span class="fa arrow"></span>
+			</a>
+				<ul class="collapse nav" id="charts">
+					<li><a href="flot.html"> <i
+							class="fa fa-angle-double-right"></i> Flot Charts
+					</a></li>
+					<li><a href="morris.html"> <i
+							class="fa fa-angle-double-right"></i> Morris Charts
+					</a></li>
+				</ul></li>
+			<!-- END CHARTS DROPDOWN -->
+
+			<!-- Navigation category -->
+			<li>
+				<h4>Users</h4>
+			</li>
+			<!-- END Navigation category -->
+
+			<!-- BEGIN PAGES DROPDOWN -->
+			<li class="panel"><a href="#{request.contextPath}/admin/Users/ManageUser.jsf" data-parent="#side"
+				data-toggle="collapse" class="accordion-toggle" data-target="#pages">
+					<i class="fa fa-list"></i> Manage Users <span class="fa arrow"></span>
+			</a>
+				<ul class="collapse nav" id="pages">
+					<li><a href="ProfilAdmin.html"> <i
+							class="fa fa-angle-double-right"></i> User Profile
+					</a></li>
+					<li><a href="pricing.html"> <i
+							class="fa fa-angle-double-right"></i> Pricing Tables
+					</a></li>
+					<li><a href="invoice.html"> <i
+							class="fa fa-angle-double-right"></i> Invoice
+					</a></li>
+					<li><a href="timeline.html"> <i
+							class="fa fa-angle-double-right"></i> Timeline
+					</a></li>
+					<li><a href="login.html"> <i
+							class="fa fa-angle-double-right"></i> Login and Register
+					</a></li>
+					<li><a href="faqs.html"> <i
+							class="fa fa-angle-double-right"></i> FAQs
+					</a></li>
+					<li><a href="blank.html"> <i
+							class="fa fa-angle-double-right"></i> Blank Page
+					</a></li>
+				</ul></li>
+			<!-- END PAGES DROPDOWN -->
+			<!-- BEGIN MORE PAGES DROPDOWN -->
+			<li class="panel"><a href="#{request.contextPath}/admin/Users/Manage.jsf" data-parent="#side"
+				data-toggle="collapse" class="accordion-toggle"
+				data-target="#m-pages"> <i class="fa fa-tag"></i> Act/Des User <span
+					class="fa arrow"></span>
+					
+			</a>
+			
+				<ul class="collapse nav" id="m-pages">
+					<li><a href="gallery.html"> <i
+							class="fa fa-angle-double-right"></i> Gallery
+					</a></li>
+					<li><a href="error-404.html"> <i
+							class="fa fa-angle-double-right"></i> Error 404
+					</a></li>
+					<li><a href="error-500.html"> <i
+							class="fa fa-angle-double-right"></i> Error 505
+					</a></li>
+				</ul></li>
+			<!-- END MORE PAGES DROPDOWN -->
+			<br></br><br></br><br></br>
+			<li >
+			<form id="f"><a><p:commandLink value="Logout .."   action="#{authBean.logout()}" ></p:commandLink></a></form></li>
+		</ul>
+		
+		
+		<!-- /.side-nav -->
+
+
+
+
+
+	</div>
+	<!-- /.navbar-collapse --> </nav>
+	<!-- /.navbar-side -->
+	<!-- END SIDE NAVIGATION -->
+
+</ui:composition>
+</html>

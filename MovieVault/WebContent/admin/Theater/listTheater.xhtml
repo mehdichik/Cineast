@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui">
+    
+			<h:form id="master">
+	<p:commandButton icon="ui-icon-circle-plus" actionListener="#{theaterBean.doNew}" value="Add new Theater" update=":details"/>
+			
+			<p:dataTable rendered="#{not empty theaterBean.findPlacesByUser(authBean.admin.id)}"
+			           value="#{theaterBean.findPlacesByUser(authBean.admin.id)}" 
+			           var="cinema" 
+			           rows="5"
+			           rowKey="#{cinema.id_Theater}"
+			           paginator="true"
+			           paginatorPosition="bottom"
+			           filteredValue="#{theaterBean.filetredTheater}"
+			           selectionMode="single"
+			           selection="#{theaterBean.cinemaTheater}"
+			           widgetVar="cinemaTabW">
+			           
+			     <f:facet name="header">
+			        <h:outputText value="Manage Theaters" />
+			     </f:facet>
+			     
+			      <p:ajax event="rowSelect" listener="#{theaterBean.onRowSelect}" update=":details"/>
+			      
+			 		 	
+			 
+			  
+			  <p:column headerText="Name" filterBy="#{cinema.name}" filterMatchMode="contains">
+			     
+			   <h:outputText value="#{cinema.name}" />
+			  </p:column>
+			  
+			  
+			  
+			   <p:column headerText="Lieu" filterBy="#{cinema.address}" filterMatchMode="contains">
+			    
+			   <h:outputText value="#{cinema.address}" />
+			  </p:column>
+			  
+			</p:dataTable>
+			
+			</h:form>
+			
+</ui:composition>

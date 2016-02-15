@@ -1,0 +1,108 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<script type="text/javascript">
+		
+	 function changeform()
+	 {
+	 	document.getElementById("master").style.display = "inline"	;
+	 	document.getElementById("myevent").style.display = "none"	;
+	 	
+	 }
+	 function changeform2()
+	 {
+	 	document.getElementById("myevent").style.display = "inline"	;
+	 	document.getElementById("master").style.display = "none"	;
+	 	
+	 	
+	 }
+	  </script>
+	<div id="tab1"
+		style="width: 900px; margin: 50px 0 0 160px; background-color: silver;">
+		<p:panel id="details" header="Movie details"
+			visible="#{movieSheetBean.form}">
+			<h:form rendered="#{movieSheetBean.form}" id="details_form">
+				<br></br>
+
+
+				<!-- <h:outputText value="Picture : "
+						style="FONT-SIZE: small; COLOR: #000000;" />
+
+					<p:graphicImage id="Movie_image" value="#{sheetImageBean.image}"
+						cache="false" styleClass="editor-picture" width="283" height="163">
+						<f:param name="idMovie" value="#{movieSheetBean.movie.id_Movie}" />
+					</p:graphicImage> -->
+				<h:panelGrid columns="2">
+					<h:outputText value="Title : "
+						style="FONT-SIZE: small; COLOR: #000000;" />
+					<p:inputText value="#{movieSheetBean.movie.title}" />
+				</h:panelGrid>
+				<h:panelGrid columns="3">
+					<h:outputText value="Type : "
+						style="FONT-SIZE: small; COLOR: #000000;" />
+					<!-- <p:inputText value="#{movieSheetBean.movie.type}" /> -->
+					<h:selectOneMenu value="#{movieSheetBean.movie.type}">
+						<f:selectItem itemLabel="Select One .." itemValue="" />
+						<f:selectItem itemLabel="Funny" itemValue="Funny" />
+						<f:selectItem itemLabel="Action" itemValue="Action" />
+						<f:selectItem itemLabel="Scary" itemValue="Scary" />
+					</h:selectOneMenu>
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<h:outputText value="Description :"
+						style="FONT-SIZE: small; COLOR: #000000;" />
+					<p:inputText value="#{movieSheetBean.movie.description}" />
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<h:outputText value="Date Of Release"
+						style="FONT-SIZE: small; COLOR: #000000;" />
+					<p:calendar value="#{movieSheetBean.movie.dateOfRelasing}"
+						id="popupCal" pattern="MM/dd/yyyy"  />
+
+				</h:panelGrid>
+
+
+				<h:outputText value="Upload picture" />
+
+				<p:fileUpload
+					fileUploadListener="#{movieSheetBean.handleFileUpload}"
+					mode="advanced" sizeLimit="100000"
+					onsuccess="uploadFileDlgW.hide()"
+					allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+
+				<h:outputText value="" />
+
+
+				<h:panelGrid columns="3">
+					<p:commandButton
+						actionListener="#{movieSheetBean.doSaveOrUpdate()}" value="Save" update="@all" onclick="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"
+						style="FONT-SIZE: small;  
+			COLOR: #0000a0; BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: bold;"
+						oncomplete="cinemaTabW.filter();" >
+						
+					</p:commandButton>
+
+					<p:commandButton actionListener="#{movieSheetBean.doDelete()}"
+						value="Delete"
+						style="FONT-SIZE: small; 
+			COLOR: #0000a0; BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: bold;"
+						oncomplete="plaTabW.filter();" />
+
+
+
+					<p:commandButton actionListener="#{movieSheetBean.doCancel()}"
+						value="Cancel"
+						style="FONT-SIZE: small; 
+			COLOR: #0000a0; BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: bold;" />
+
+
+
+				</h:panelGrid>
+
+			</h:form>
+		</p:panel>
+	</div>
+</ui:composition>

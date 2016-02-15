@@ -1,0 +1,159 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+                	
+			<p:commandButton icon="ui-icon-circle-plus" actionListener="#{movieSheetBean.doNew()}" value="Add new Movie" update=":details"/>
+			
+			<h:form id="form">
+    <p:dataGrid var="movie" value="#{movieSheetBean.sheet}" columns="3" layout="grid"
+        rows="12" paginator="true" id="cars"
+        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+        rowsPerPageTemplate="6,12,16">
+ 
+        <f:facet name="header">
+            List of Movies
+        </f:facet>
+ 
+        <p:panel header="#{movie.title}" style="text-align:center">
+            <h:panelGrid columns="1" style="width:100%">
+                <p:graphicImage id="place_image" value="#{sheetImageBean.image}" cache="false" styleClass="editor-picture" height="170"
+										width="290">
+    							<f:param name="idMovie" value="#{movie.id_Movie}" />
+						</p:graphicImage>
+ 
+                <h:outputText value="#{movie.dateOfRelasing}" />
+                <!-- <p:commandButton  update="@form" 
+						action="#{movieSheetBean.delete()}" icon="ui-icon-circle-close">
+						<p:confirm header="Confirmation" message="Etes-vous sûr ?"
+								icon="ui-icon-alert" />
+								<f:setPropertyActionListener
+							target="#{movieSheetBean.sheet}" value="#{movie}"></f:setPropertyActionListener>
+					</p:commandButton> -->
+ 					<p:commandButton value="Remove" update=":form">
+						<f:setPropertyActionListener
+							target="#{movieSheetBean.movie}" value="#{movie}"></f:setPropertyActionListener>
+						<f:setPropertyActionListener target="#{movieSheetBean.form}"
+							value="true"></f:setPropertyActionListener>
+					</p:commandButton>
+					
+		
+						<p:column  style="width:10px;text-align: center"  styleClass="table" headerText="#{messages['movieSheets.lblchall']}">
+
+						<p:commandButton  update=":form:dial2" action="#{movieSheetBean.CrewOfMovie(movie.id_Movie)}" process="@this"  id="cb4"  oncomplete="PF('CrewDialog').show()" icon="ui-icon-search" title="View">
+							<f:setPropertyActionListener  value="#{movieSheetBean.CrewOfMovie(movie.id_Movie)}" target="#{movieSheetBean.lsCrew}" />
+						</p:commandButton> 
+						  
+						
+
+						</p:column>
+						           <p:commandLink update=":form:placeDetail" oncomplete="PF('placeDialog').show()" title="View Detail">
+                 
+                    <h:outputText styleClass="ui-icon ui-icon-image" style="margin:0 auto;" /> 
+                    <f:setPropertyActionListener value="#{movie}" 
+                            target="#{movieSheetBean.selectedMovie}" />
+</p:commandLink>   
+            </h:panelGrid>
+        </p:panel>
+ 
+    </p:dataGrid>
+ 
+<!--     <p:dialog header="Movie Crew" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false"> -->
+<!--         <p:outputPanel id="carDetail" style="text-align:center;"> -->
+<!--             <p:panelGrid  columns="2" rendered="#{not empty movieSheetBean.selectedCrew}" columnClasses="label,value"> -->
+<!--                 <f:facet name="header"> -->
+<!--                     <p:graphicImage name="#{movieSheetBean.selectedCrew.img}"/>  -->
+<!--                 </f:facet> -->
+ 
+<!--                 <h:outputText value="Id:" /> -->
+<!--                 <h:outputText value="#{movieSheetBean.selectedCrew}" /> -->
+ 
+<!--                 <h:outputText value="Year" /> -->
+<!--                 <h:outputText value="#{movieSheetBean.selectedCrew.actors}" /> -->
+ 
+<!--                 <h:outputText value="Color:" /> -->
+<!--                 <h:outputText value="#{movieSheetBean.selectedCrew.directors}" /> -->
+ 
+<!--                 <h:outputText value="Price" /> -->
+<!--                 <h:outputText value="#{movieSheetBean.selectedCrew.stars}" /> -->
+<!--             </p:panelGrid> -->
+<!--         </p:outputPanel> -->
+<!--     </p:dialog> -->
+    
+ 
+
+
+
+
+
+
+	<p:dialog header="Place Detail" widgetVar="placeDialog" modal="true" dynamic="true" >
+		<p:outputPanel id="placeDetail" style="text-align:center;">
+		
+		<h:panelGrid  columns="2" cellpadding="0" >
+		
+			
+			
+			
+			<h:outputLabel for="MovieName" value="Title :" />
+				<h:outputText id="MovieName" value="#{movieSheetBean.selectedMovie.title}"/>
+				
+				<h:outputLabel for="MovieDescription" value="Description : " />
+				<h:outputText id="Description" value="#{movieSheetBean.selectedMovie.description}" />
+				
+			<h:outputLabel for="MovieType" value="Type : " />
+				<h:outputText id="Type" value="#{movieSheetBean.selectedMovie.type}" />
+			
+							<h:outputLabel for="rate" value="Rate number : " />
+				<p:rating value="#{movieSheetBean.selectedMovie.moyRate}" readonly="true" /> 
+				
+				
+				
+				
+			     <p:commandButton value="AddToBoxOffice"   actionListener="#{movieSheetBean.doAddBox()}" />
+						
+				
+       
+  
+        
+        
+                
+			</h:panelGrid>
+	
+		</p:outputPanel>
+		
+	</p:dialog>
+
+
+  
+    
+    	<p:dialog id="dial2"  header="Selected Crew" widgetVar="CrewDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="true" width="400"  >
+					<p:outputPanel id="multiChallengeDetail" style="text-align:center;">
+					
+						<p:dataTable value="#{movieSheetBean.lsCrew}" var="crew">
+						<p:column  id="datec" width="10" styleClass="table" headerText="Actors" >
+						<h:outputText value="#{crew.actors}" />
+						</p:column>
+						<p:column  id="Datc" width="10" styleClass="table" headerText="Directors" >
+						<h:outputText value="#{crew.directors}" />
+						</p:column>
+						
+						<p:column  id="Datc1" width="10" styleClass="table" headerText="MovieMaker" >
+						<h:outputText value="#{crew.movieMaker}" />
+						</p:column>
+						
+						<p:column  id="Datc2" width="10" styleClass="table" headerText="Stars" >
+						<h:outputText value="#{crew.stars}" />
+						</p:column>
+						
+				
+						</p:dataTable>
+		
+					</p:outputPanel>
+				</p:dialog>
+</h:form>
+			
+			
+			
+</ui:composition>

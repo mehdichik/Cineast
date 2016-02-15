@@ -1,0 +1,71 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+			
+			<p:panel id="details" header="Theaters details" visible="#{theaterBean.formDisplayed}">
+			<h:form rendered="#{theaterBean.formDisplayed}" id="details_form">
+			
+			<h:panelGrid columns="2">
+			
+			<h:outputText value="Picture : " style="FONT-SIZE: small; COLOR: #000000;"/>
+    
+    <p:graphicImage id="Theater_image" value="#{theaterImageBean.image}" cache="false" styleClass="editor-picture" width="283" height="163">
+    							<f:param name="idTheater" value="#{theaterBean.cinemaTheater.id_Theater}" />
+						</p:graphicImage>
+			
+				<h:outputText value="Name : " style="FONT-SIZE: small; COLOR: #000000;"/>
+			    <p:inputText value="#{theaterBean.cinemaTheater.name}" />
+			    
+			    
+			
+				<h:outputText value="Description :" style="FONT-SIZE: small; COLOR: #000000;"/>
+			    <p:inputText value="#{theaterBean.cinemaTheater.description}" />
+  				<h:outputText value="Location : " style="FONT-SIZE: small; COLOR: #000000;"/>
+      			<p:inputText value="#{theaterBean.cinemaTheater.address}" />
+      	
+ 
+     <p:growl id="messages" showDetail="true" life="2000" />  
+  
+    <p:gmap center="36.823833, 10.186767" zoom="7" type="ROADMAP" style="width:600px;height:400px"> 
+  
+        <p:ajax event="pointSelect" listener="#{theaterBean.onPointSelect}" update="messages" />  
+  
+    </p:gmap>  
+      				
+
+  <h:outputText value="Upload picture" />
+  
+  <p:fileUpload 	fileUploadListener="#{theaterBean.handleFileUpload}" 
+								  			mode="advanced"
+ 											
+						 		  			sizeLimit="100000"
+						 		  			onsuccess="uploadFileDlgW.hide()"
+						 		  			allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+    
+  	<h:outputText value="" />
+  
+	 
+			<h:panelGrid columns="3">
+			<p:commandButton actionListener="#{theaterBean.doSaveOrUpdate()}" value="Save" style="FONT-SIZE: small; 
+			COLOR: #0000a0; BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: bold;" update=":master :details" 
+					oncomplete="cinemaTabW.filter();"/> 
+			
+			<p:commandButton actionListener="#{theaterBean.doDelete()}" value="Delete" style="FONT-SIZE: small; 
+			COLOR: #0000a0; BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: bold;" update=":master :details" 
+					oncomplete="plaTabW.filter();"/> 
+			
+			
+					
+							<p:commandButton actionListener="#{theaterBean.doCancel()}" value="Cancel" style="FONT-SIZE: small; 
+			COLOR: #0000a0; BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: bold;" update=":details"/>
+					
+					
+<!-- 					<p:commandButton icon="ui-icon-circle-plus" actionListener="#{placeBean.doAddWish()}" value="ADD To My WishListe" /> -->
+			</h:panelGrid>
+			</h:panelGrid>
+			</h:form>
+			</p:panel>
+			
+</ui:composition>

@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:panel id="details" header="Quiz details" visible="#{quizBean.formDisplayed}">
+			<h:form rendered="#{quizBean.formDisplayed}" id="details_form">
+			
+			<h:panelGrid columns="2">
+			
+			    <h:outputText value="Question : " style="FONT-SIZE: small; COLOR: #000000;"/>
+			    <p:inputText value="#{quizBean.quiz.question}" />
+			    
+			       <h:outputText value="Answer 1 : " style="FONT-SIZE: small; COLOR: #000000;"/>
+			    <p:inputText value="#{quizBean.quiz.answer1}" />
+			
+			
+			    
+			    <h:outputText value="Answer 2 : " style="FONT-SIZE: small; COLOR: #000000;"/>
+			    <p:inputText value="#{quizBean.quiz.answer2}" />
+			    
+			    <h:outputText value="Valid Answer : " style="FONT-SIZE: small; COLOR: #000000;"/>
+			    <p:inputText value="#{quizBean.quiz.answerValidation}" />
+			    
+			    
+      	
+ 
+     <p:growl id="messages" showDetail="true" life="2000" />  
+  
+   
+      				
+
+  
+    
+  	<h:outputText value="" />
+  
+	 
+			<h:panelGrid columns="3">
+			<p:commandButton
+						actionListener="#{quizBean.doSaveOrUpdate()}" value="Save" update="@all" onclick="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"
+						style="FONT-SIZE: small;  
+			COLOR: #0000a0; BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: bold;"
+						oncomplete="cinemaTabW.filter();" >
+						</p:commandButton>
+			
+			<p:commandButton actionListener="#{quizBean.doDelete()}" value="Delete" style="FONT-SIZE: small; 
+			COLOR: #0000a0; BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: bold;" update=":master :details" 
+					oncomplete="userTabW.filter();"/> 
+			
+			
+					
+			
+			</h:panelGrid>
+			</h:panelGrid>
+			</h:form>
+			</p:panel>
+</ui:composition>

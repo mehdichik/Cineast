@@ -1,0 +1,103 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template/main.xhtml">
+                	
+			<ui:define name="pageContent">
+
+
+<h:form id="form">
+			    <p:growl id="messages" showDetail="true"/>
+                
+
+	<p:dataGrid var="pl" value="#{wishBean.getBoxbyId(authBean.admin.id)}" columns="3"
+		rows="12" 
+		paginator="true"
+			           paginatorPosition="bottom">
+			           
+
+        <p:panel header="#{pl.movieSheet.type}" style="text-align:center">
+            <h:panelGrid columns="1" style="width:100%">
+            
+  <p:graphicImage id="place_image" value="#{sheetImageBean.image}" cache="false" styleClass="editor-picture" height="170"
+										width="290">
+    							<f:param name="idMovie" value="#{pl.movieSheet.id_Movie}" />
+						</p:graphicImage>
+ 
+                <h:outputText value="#{pl.movieSheet.dateOfRelasing}" />
+
+                 <p:commandLink update=":form:placeDetail" oncomplete="PF('placeDialog').show()" title="View Detail">
+                    <h:outputText styleClass="ui-icon ui-icon-image" style="margin:0 auto;" /> 
+                    <f:setPropertyActionListener value="#{pl.movieSheet}" 
+                            target="#{wishBean.selectedMovie}" />
+                </p:commandLink>
+                
+                
+ 
+               <p:commandLink action="#{wishBean.doDeleteBoxOffice(pl)}" oncomplete="window.location.href = '/MovieVault/admin/Movie/Box.jsf'" >
+             <h:outputText styleClass="ui-icon ui-icon-trash" style="margin:0 auto;" /> 
+               
+               </p:commandLink>
+               
+            </h:panelGrid>
+        </p:panel>
+
+	</p:dataGrid>
+	
+	
+	<p:dialog header="Place Detail" widgetVar="placeDialog" modal="true">
+		<p:outputPanel id="placeDetail" style="text-align:center;">
+		
+		<h:panelGrid  columns="2" cellpadding="2">
+		
+			
+			
+			
+			<h:outputLabel for="Place Name" value=" Desc :" />
+				<h:outputText id="PlaceName" value="#{wishBean.selectedMovie.description}"/>
+				
+				<h:outputLabel for="PlaceDesc" value="title : " />
+				<h:outputText id="Description" value="#{wishBean.selectedMovie.title}" />
+				
+				<h:outputLabel for="location" value="DateOfRelasion : " />
+				<h:outputText id="location" value="#{wishBean.selectedMovie.dateOfRelasing}" />
+				<h:outputLabel for="rate" value="Rate number : " />
+			
+				
+				<p:rating value="#{wishBean.selectedMovie.moyRate}" readonly="true" /> 
+			
+			
+						
+<!-- 					Show video	 -->
+						
+<!-- 				<p:media value="http://www.youtube.com/v/KZnUr8lcqjo" width="400" height="169" player="flash"/> -->
+				
+				
+       
+        
+        
+                
+			</h:panelGrid>
+				   <p:graphicImage id="place_image" value="#{sheetImageBean.image}" cache="false" styleClass="editor-picture">
+    							<f:param name="idMovie" value="#{wishBean.selectedMovie.id_Movie}" />
+						</p:graphicImage>
+		</p:outputPanel>
+		
+	</p:dialog>
+	
+	
+
+</h:form>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&amp;appId=516741378384565&amp;version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+</ui:define>
+</ui:composition>
+		

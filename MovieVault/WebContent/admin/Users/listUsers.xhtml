@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui">
+    
+			<h:form id="master">
+	<p:commandButton icon="ui-icon-circle-plus" actionListener="#{userBean.doNew()}" value="Add new User" update=":details"/>
+			
+			<p:dataTable rendered="#{not empty userBean.users}"
+			           value="#{userBean.users}" 
+			           var="user" 
+			           rows="5"
+			           rowKey="#{user.id}"
+			           paginator="true"
+			           paginatorPosition="bottom"
+			           filteredValue="#{userBean.fileteredUsers}"
+			           selectionMode="single"
+			           selection="#{userBean.user}"
+			           widgetVar="userTabW">
+			           
+			     <f:facet name="header">
+			        <h:outputText value="Manage Users" />
+			     </f:facet>
+			     
+			      <p:ajax event="rowSelect" listener="#{userBean.onRowSelect}" update=":details"/>
+			      
+			 		 	
+			 
+			  
+			  <p:column headerText="Name" filterBy="#{user.nom}" filterMatchMode="contains">
+			     
+			   <h:outputText value="#{user.nom}" />
+			  </p:column>
+			  
+			  
+			  
+			   <p:column headerText="login" filterBy="#{user.login}" filterMatchMode="contains">
+			    
+			   <h:outputText value="#{user.login}" />
+			  </p:column>
+			  
+			</p:dataTable>
+			
+			</h:form>
+			
+</ui:composition>

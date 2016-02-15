@@ -1,0 +1,55 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+  template="/template/main.xhtml">
+                
+                
+                
+                	
+			<ui:define name="pageContent">
+		<h1>Activer/Déactiver un compte User</h1>
+		<p:separator></p:separator>
+		<h:form>
+			<p:dataTable value="#{userBean.users}" var="user">
+				<f:facet name="header">
+ Les comptes User
+ </f:facet>
+				<p:column headerText="#">
+ #{user.id}
+ </p:column>
+				<p:column headerText="lastName">
+ #{user.nom}
+ </p:column>
+				<p:column headerText="adress">
+ #{user.adress}
+ </p:column>
+				<p:column headerText="login">
+ #{user.login}
+ </p:column>
+				<p:column headerText="Email">
+ #{user.mail}
+ </p:column>
+				<p:column headerText="action">
+					<p:commandButton value="activer"
+						action="#{userBean.activer()}" update="@form"
+						rendered="#{!user.valide}">
+						<f:setPropertyActionListener target="#{userBean.user}"
+							value="#{user}"></f:setPropertyActionListener>
+					</p:commandButton>
+					<p:commandButton value="desactiver"
+						action="#{userBean.deActiver()}" update="@form"
+						rendered="#{user.valide}">
+						<f:setPropertyActionListener target="#{userBean.user}"
+							value="#{user}"></f:setPropertyActionListener>
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>
